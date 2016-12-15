@@ -1,0 +1,6 @@
+framework module Pods_KeyStorage_Tests {
+  umbrella header "Pods-KeyStorage_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

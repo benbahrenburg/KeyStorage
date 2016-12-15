@@ -1,0 +1,6 @@
+framework module KeyStorage {
+  umbrella header "KeyStorage-umbrella.h"
+
+  export *
+  module * { export * }
+}

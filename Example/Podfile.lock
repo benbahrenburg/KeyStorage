@@ -1,0 +1,16 @@
+PODS:
+  - KeyStorage (0.1.0)
+
+DEPENDENCIES:
+  - KeyStorage (from `../`)
+
+EXTERNAL SOURCES:
+  KeyStorage:
+    :path: ../
+
+SPEC CHECKSUMS:
+  KeyStorage: 6bf71e7e9191deea1bb065ac832e352638fbb03e
+
+PODFILE CHECKSUM: 0235689da41a5e64fb9482dac246e5fbf13ca70e
+
+COCOAPODS: 1.1.1

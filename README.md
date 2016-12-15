@@ -22,7 +22,7 @@ pod "KeyStorage"
 
 ## Author
 
-Ben Bahrenburg, ben.bahrenburg@gmail.com
+Ben Bahrenburg, @bencoding
 
 ## License
 
