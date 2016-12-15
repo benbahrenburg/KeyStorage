@@ -3,7 +3,7 @@
 //  Journey
 //
 //  Created by Ben Bahrenburg on 12/10/16.
-//  Copyright © 2016 pwc.com. All rights reserved.
+//  Copyright © 2016 bencoding.com. All rights reserved.
 //
 
 import Foundation
@@ -127,6 +127,28 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
             }
         }
         return accessGroup
+    }
+    
+    
+    @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
+        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        return saveData(value: data, forKey: forKey)
+    }
+    
+    public func getURL(forKey: String) -> URL? {
+        guard let urlData = load(forKey: forKey) else {
+            return nil
+        }
+        
+        return NSKeyedUnarchiver.unarchiveObject(with: urlData) as? URL
+    }
+    
+    public func getURL(forKey: String, defaultValue: URL) -> URL {
+        guard let urlData = load(forKey: forKey) else {
+            return defaultValue
+        }
+        
+        return (NSKeyedUnarchiver.unarchiveObject(with: urlData) as? URL)!
     }
     
     @discardableResult public func setObject(forKey: String, value: NSCoding) -> Bool {

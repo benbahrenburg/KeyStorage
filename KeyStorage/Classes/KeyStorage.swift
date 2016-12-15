@@ -3,7 +3,7 @@
 //  Journey
 //
 //  Created by Ben Bahrenburg on 3/23/16.
-//  Copyright © 2016 pwc.com. All rights reserved.
+//  Copyright © 2016 bencoding.com. All rights reserved.
 //
 
 import Foundation
@@ -30,9 +30,13 @@ public protocol KeyStorage {
     func getFloat(forKey: String) -> Float
     func getFloat(forKey: String, defaultValue: Float) -> Float
     
+    func getURL(forKey: String) -> URL?
+    func getURL(forKey: String, defaultValue: URL) -> URL
+    
     func getArray(forKey: String) -> NSArray?
     func getDictionary(forKey: String) -> NSDictionary?
     
+    @discardableResult func setURL(forKey: String, value: URL) -> Bool
     @discardableResult func setFloat(forKey: String, value: Float) -> Bool
     @discardableResult func setDouble(forKey: String, value: Double) -> Bool
     @discardableResult func setObject(forKey: String, value: NSCoding) -> Bool

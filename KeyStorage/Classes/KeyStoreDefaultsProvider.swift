@@ -196,7 +196,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         return defaults.url(forKey: forKey)
     }
     
-    public func getURL(forKey: String, defaultValue: URL) -> URL? {
+    public func getURL(forKey: String, defaultValue: URL) -> URL {
         if let stored = defaults.url(forKey: forKey) {
             return stored
         }
