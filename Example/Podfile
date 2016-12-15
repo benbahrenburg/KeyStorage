@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'KeyStorage_Example' do
+  pod 'KeyStorage', :path => '../'
+
+  target 'KeyStorage_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
