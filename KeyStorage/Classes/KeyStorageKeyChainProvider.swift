@@ -129,7 +129,6 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         return accessGroup
     }
     
-    
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(value: data, forKey: forKey)

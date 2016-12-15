@@ -49,7 +49,8 @@ public protocol KeyStorage {
     @discardableResult func setDictionary(forKey: String, value: NSDictionary) -> Bool
     
     @discardableResult func removeKey(forKey: String) -> Bool
+    @discardableResult func removeAllKeys() -> Bool
+    
     func exists(forKey: String) -> Bool
     
-    @discardableResult func removeAllKeys() -> Bool
 }
