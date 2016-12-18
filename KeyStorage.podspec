@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '0.1.0'
-  s.summary          = 'An easy lite key persistance framework for the iOS KeyChain and NSUserDefaults.'
+  s.version          = '0.1.1'
+  s.summary          = 'Simplifying securely saving key information'
   s.description      = <<-DESC
-An easy lite key persistance framework for the iOS KeyChain and NSUserDefaults.
+Simplifying securely saving key information.  An easy lite key persistance framework for the iOS KeyChain and NSUserDefaults.
                        DESC
 
   s.homepage         = 'https://github.com/benbahrenburg/KeyStorage'

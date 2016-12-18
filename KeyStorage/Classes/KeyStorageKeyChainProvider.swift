@@ -1,8 +1,8 @@
 //
-//  KeyStorageKeyChain.swift
-//  Journey
+//  KeyStorage - Simplifying securely saving key information
+//  KeyStorageKeyChainProvider.swift
 //
-//  Created by Ben Bahrenburg on 12/10/16.
+//  Created by Ben Bahrenburg on 3/23/16.
 //  Copyright © 2016 bencoding.com. All rights reserved.
 //
 
@@ -74,23 +74,27 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     fileprivate var accessGroup: String?
     fileprivate var accessible = KeyChainInfo.accessibleOption.afterFirstUnlock
     fileprivate var serviceName = Bundle.main.bundleIdentifier ?? "KeyStorageKeyChainProvider"
+    fileprivate var crypter: KeyStorageCrypter?
     
     public var synchronizable: Bool = false
     
-    public init(serviceName: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock) {
+    public init(serviceName: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
         self.serviceName = serviceName
         self.accessible = accessible
+        self.crypter = cryptoProvider
     }
     
-    public init(accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock) {
+    public init(accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
         self.accessGroup = mergeGroupIdentifier(accessGroup: accessGroup)
         self.accessible = accessible
+        self.crypter = cryptoProvider
     }
     
-    public init(serviceName: String, accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock) {
+    public init(serviceName: String, accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
         self.accessGroup = mergeGroupIdentifier(accessGroup: accessGroup)
         self.accessible = accessible
         self.serviceName = serviceName
+        self.crypter = cryptoProvider
     }
     
     public func sharedAccessGroupPrefix() -> String? {
@@ -131,7 +135,7 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
-        return saveData(value: data, forKey: forKey)
+        return saveData(forKey: forKey, value: data)
     }
     
     public func getURL(forKey: String) -> URL? {
@@ -152,38 +156,38 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     
     @discardableResult public func setObject(forKey: String, value: NSCoding) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
-        return saveData(value: data, forKey: forKey)
+        return saveData(forKey: forKey, value: data)
     }
     
     @discardableResult public func setData(forKey: String, value: Data) -> Bool {
-        return saveData(value: value, forKey: forKey)
+        return saveData(forKey: forKey, value: value)
     }
     
     @discardableResult public func setString(forKey: String, value: String) -> Bool {
         if let data = value.data(using: .utf8) {
-            return saveData(value: data, forKey: forKey)
+            return saveData(forKey: forKey, value: data)
         }
         return false
     }
     
     @discardableResult public func setInt(forKey: String, value: Int) -> Bool {
-        return saveObject(value: NSNumber(value: value), forKey: forKey)
+        return saveObject(forKey: forKey, value: NSNumber(value: value))
     }
     
     @discardableResult public func setDouble(forKey: String, value: Double) -> Bool {
-        return saveObject(value: NSNumber(value: value), forKey: forKey)
+        return saveObject(forKey: forKey, value: NSNumber(value: value))
     }
     
     @discardableResult public func setFloat(forKey: String, value: Float) -> Bool {
-        return saveObject(value: NSNumber(value: value), forKey: forKey)
+        return saveObject(forKey: forKey, value: NSNumber(value: value))
     }
     
     @discardableResult public func setDate(forKey: String, value: Date) -> Bool {
-        return saveObject(value: NSNumber(value: value.timeIntervalSince1970), forKey: forKey)
+        return saveObject(forKey: forKey, value: NSNumber(value: value.timeIntervalSince1970))
     }
     
     @discardableResult public func setBool(forKey: String, value: Bool) -> Bool {
-        return saveObject(value: NSNumber(value: value), forKey: forKey)
+        return saveObject(forKey: forKey, value: NSNumber(value: value))
     }
     
     @discardableResult public func removeKey(forKey: String) -> Bool {
@@ -332,7 +336,7 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     
     @discardableResult public func setArray(forKey: String, value: NSArray) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
-        return saveData(value: data, forKey: forKey)
+        return saveData(forKey: forKey, value: data)
     }
     
     public func getDictionary(forKey: String) -> NSDictionary? {
@@ -345,7 +349,7 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     
     @discardableResult public func setDictionary(forKey: String, value: NSDictionary) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
-        return saveData(value: data, forKey: forKey)
+        return saveData(forKey: forKey, value: data)
     }
     
     private func getObject(forKey: String) -> NSCoding? {
@@ -356,15 +360,20 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         return NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? NSCoding
     }
     
-    private func saveObject(value: NSCoding, forKey: String) -> Bool {
+    private func saveObject(forKey: String, value: NSCoding) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
-        return saveData(value: data, forKey: forKey)
+        return saveData(forKey: forKey, value: data)
     }
     
-    private func saveData(value: Data, forKey: String) -> Bool {
+    private func saveData(forKey: String, value: Data) -> Bool {
         var query = buildQuery(forKey: forKey)
-        query[kSecValueData as String] = value
         
+        if let crypto = self.crypter {
+            query[kSecValueData as String] = crypto.encrypt(data: value, forKey: forKey)
+        } else {
+            query[kSecValueData as String] = value
+        }
+    
         SecItemDelete(query as CFDictionary)
         
         let status: OSStatus = SecItemAdd(query as CFDictionary, nil)
@@ -378,7 +387,6 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     }
     
     private func load(forKey: String) -> Data? {
-        
         var query = buildQuery(forKey: forKey)
         // Setup parameters needed to return value from query
         query[kSecMatchLimit as String] = kSecMatchLimitOne
@@ -389,6 +397,9 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         if status == errSecSuccess {
             if let data = dataTypeRef as! Data? {
+                if let crypto = self.crypter {
+                    return crypto.decrypt(data: data, forKey: forKey)
+                }
                 return data
             }
         }

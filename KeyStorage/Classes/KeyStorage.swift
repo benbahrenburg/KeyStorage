@@ -1,6 +1,6 @@
 //
+//  KeyStorage - Simplifying securely saving key information
 //  KeyStorage.swift
-//  Journey
 //
 //  Created by Ben Bahrenburg on 3/23/16.
 //  Copyright © 2016 bencoding.com. All rights reserved.
