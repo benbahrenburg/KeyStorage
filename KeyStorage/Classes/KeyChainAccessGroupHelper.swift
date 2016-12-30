@@ -12,9 +12,9 @@ import Security
 open class KeyChainAccessGroupHelper {
     
     public struct accessGroupInfo {
-        var prefix: String
-        var keyChainGroup: String
-        var rawValue: String
+        public var prefix: String
+        public var keyChainGroup: String
+        public var rawValue: String
     }
     
     public class func getAccessGroupInfo() -> accessGroupInfo? {
