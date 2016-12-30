@@ -10,6 +10,7 @@
 		07046341920F0B56ACFE86B00DCC9FD0 /* KeyStorage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82707E8F9D47862D5242896EE623EB42 /* KeyStorage-dummy.m */; };
 		250169D3B325E0039412985532F25159 /* Pods-KeyStorage_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 53160DD70F07775EEAD28D8357CB487C /* Pods-KeyStorage_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		341AE8BEF996997332B37EF3203B4A2E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		3E10ACB61E16052500EE6D5E /* KeyChainAccessGroupHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E10ACB51E16052500EE6D5E /* KeyChainAccessGroupHelper.swift */; };
 		3E18C9F81E0222DC0058E152 /* KeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18C9F51E0222DC0058E152 /* KeyStorage.swift */; };
 		3E18C9F91E0222DC0058E152 /* KeyStorageKeyChainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18C9F61E0222DC0058E152 /* KeyStorageKeyChainProvider.swift */; };
 		3E18C9FA1E0222DC0058E152 /* KeyStoreDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E18C9F71E0222DC0058E152 /* KeyStoreDefaultsProvider.swift */; };
@@ -42,6 +43,7 @@
 		3614FC2EBEF5DB56D6D063C9F6C3B21D /* KeyStorage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeyStorage-umbrella.h"; sourceTree = "<group>"; };
 		3782080124E70EC460708124F374C6F6 /* Pods-KeyStorage_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-KeyStorage_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		3B2DC6B48D1D8B1834E7CC0D212A7864 /* Pods_KeyStorage_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeyStorage_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E10ACB51E16052500EE6D5E /* KeyChainAccessGroupHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainAccessGroupHelper.swift; sourceTree = "<group>"; };
 		3E18C9F51E0222DC0058E152 /* KeyStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStorage.swift; sourceTree = "<group>"; };
 		3E18C9F61E0222DC0058E152 /* KeyStorageKeyChainProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStorageKeyChainProvider.swift; sourceTree = "<group>"; };
 		3E18C9F71E0222DC0058E152 /* KeyStoreDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreDefaultsProvider.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				3EBE022D1E070BFB0034F6BB /* KeyStorageCrypter.swift */,
 				3E18C9F61E0222DC0058E152 /* KeyStorageKeyChainProvider.swift */,
 				3E18C9F71E0222DC0058E152 /* KeyStoreDefaultsProvider.swift */,
+				3E10ACB51E16052500EE6D5E /* KeyChainAccessGroupHelper.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -367,6 +370,7 @@
 				3E18C9F91E0222DC0058E152 /* KeyStorageKeyChainProvider.swift in Sources */,
 				07046341920F0B56ACFE86B00DCC9FD0 /* KeyStorage-dummy.m in Sources */,
 				3E18C9F81E0222DC0058E152 /* KeyStorage.swift in Sources */,
+				3E10ACB61E16052500EE6D5E /* KeyChainAccessGroupHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

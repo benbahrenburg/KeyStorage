@@ -85,52 +85,16 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     }
     
     public init(accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
-        self.accessGroup = mergeGroupIdentifier(accessGroup: accessGroup)
+        self.accessGroup = accessGroup
         self.accessible = accessible
         self.crypter = cryptoProvider
     }
     
     public init(serviceName: String, accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
-        self.accessGroup = mergeGroupIdentifier(accessGroup: accessGroup)
+        self.accessGroup = accessGroup
         self.accessible = accessible
         self.serviceName = serviceName
         self.crypter = cryptoProvider
-    }
-    
-    public func sharedAccessGroupPrefix() -> String? {
-        let query: [String:Any] = [
-            kSecClass as String : kSecClassGenericPassword,
-            kSecAttrAccount as String : "detectAppIdentifierForKeyChainGroupIdUsage",
-            kSecAttrAccessible as String: kSecAttrAccessibleAlwaysThisDeviceOnly,
-            kSecReturnAttributes as String : kCFBooleanTrue
-        ]
-        
-        var dataTypeRef: AnyObject?
-        var status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
-        
-        if status == errSecItemNotFound {
-            let createStatus = SecItemAdd(query as CFDictionary, nil)
-            guard createStatus == errSecSuccess else { return nil }
-            status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
-        }
-        
-        guard status == errSecSuccess else { return nil }
-        
-        let accessGroup = ((dataTypeRef as! [AnyHashable: Any])[(kSecAttrAccessGroup as String)] as! String)
-        if let first = accessGroup.components(separatedBy: ".").first {
-            return first
-        }
-        return nil
-        
-    }
-    
-    private func mergeGroupIdentifier(accessGroup: String) -> String {
-        if let prefix = sharedAccessGroupPrefix() {
-            if((accessGroup.range(of: prefix, options: String.CompareOptions.caseInsensitive, range: nil, locale: nil)) == nil) {
-                return String(format: "%@.%@", prefix, accessGroup)
-            }
-        }
-        return accessGroup
     }
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
