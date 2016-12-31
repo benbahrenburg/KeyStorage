@@ -32,16 +32,16 @@ There are five main classes in KeyStorage:
 4. KeyStoreDefaultsProvider -  A NSUserDefaults implementation of the KeyStorage protocol
 5. KeychainHelpers - Tools for workign with the iOS keychain
 
-## KeyStorage Save Options
+## Save Options
 
 Each of the KeyStorage providers has a variety of type safe options to save key information.  Please visit the [wiki](https://github.com/benbahrenburg/KeyStorage/wiki/KeyStorage---Save-Options) for more details.
 
         
-## KeyStorage Return Options
+## Return Options
 
 Each of the KeyStorage providers has a variety of type safe options to read key information.  Please visit the [wiki](https://github.com/benbahrenburg/KeyStorage/wiki/KeyStorage---Read-Options) for more details.
 
-## KeyStorage Working Options
+## Actions / Helpers
 
 KeyStorage provides a few methods to help you work with your StorageProvders.
 
@@ -65,32 +65,29 @@ let success = keyStoreProvider.removeAllKeys()
 print("was success? \(success)")
 ```
 
-## KeyStoreDefaultsProvider
+## Storage Providers
+
+### KeyStoreDefaultsProvider
 The KeyStoreDefaultsProvider storage provider manages persistance to NSUserDefaults.
 
-### KeyStoreDefaultsProvider - Creation 
+#### KeyStoreDefaultsProvider - Creation 
 
 The KeyStoreDefaultsProvider can be created with the following optional arguments.
 
-<b>suiteName</b> : String
-
-The specified app group name that will be used
-
+* suiteName : String
+<br/>The specified app group name that will be used
 ```swift
 let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup")
 ```
 
-<b>cryptoProvider</b> : String
-
-The encryption provider that will be used to encrypt and decrypt key values
-
+* cryptoProvider : String
+<br/>The encryption provider that will be used to encrypt and decrypt key values
 ```swift
 let provider = KeyStoreDefaultsProvider(cryptoProvider: myCryptoProvider)
 ```
 
-<b>Combined Example</b>
-
-You can specify both if you wish to use an encryption provider and implement app group sharing.
+* Combined Example
+<br/>You can specify both if you wish to use an encryption provider and implement app group sharing.
 
 ```swift
 let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup", cryptoProvider: myCryptoProvider)
