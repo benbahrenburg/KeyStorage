@@ -43,11 +43,27 @@ Each of the KeyStorage providers has a variety of type safe options to read key 
 
 ## KeyStorage Working Options
 
-<b>exists</b>
+KeyStorage provides a few methods to help you work with your StorageProvders.
 
-<b>removeKey</b>
+<b>exists</b> - Returns a Boolean if the specified key exists
 
-<b>removeAllKeys</b>
+```swift
+let doesExist = keyStoreProvider.exists(forKey: "Hello")
+```
+
+<b>removeKey</b> - Removes the stored value for the specified key
+
+```swift
+let success = keyStoreProvider.removeKey(forKey: "Hello")
+print("was success? \(success)")
+```
+
+<b>removeAllKeys</b> - Removes all stored values for the KeyStorage provider
+
+```swift
+let success = keyStoreProvider.removeAllKeys()
+print("was success? \(success)")
+```
 
 ## KeyStoreDefaultsProvider
 The KeyStoreDefaultsProvider storage provider manages persistance to NSUserDefaults.
@@ -60,9 +76,25 @@ The KeyStoreDefaultsProvider can be created with the following optional argument
 
 The specified app group name that will be used
 
+```swift
+let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup")
+```
+
 <b>cryptoProvider</b> : String
 
 The encryption provider that will be used to encrypt and decrypt key values
+
+```swift
+let provider = KeyStoreDefaultsProvider(cryptoProvider: myCryptoProvider)
+```
+
+<b>Combined Example</b>
+
+You can specify both if you wish to use an encryption provider and implement app group sharing.
+
+```swift
+let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup", cryptoProvider: myCryptoProvider)
+```
 
 ## KeychainHelpers
 
