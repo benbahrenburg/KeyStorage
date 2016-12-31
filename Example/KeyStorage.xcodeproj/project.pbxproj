@@ -7,18 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E8F30581E17593000204F2A /* KeyStorage_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E8F30571E17593000204F2A /* KeyStorage_Tests.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
+		DB519ABFEFBDE14B65C5CA12 /* Pods_KeyStorage_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED4F622255433DC9AAC533A /* Pods_KeyStorage_Tests.framework */; };
 		F4BB38513BAF6DCE7932272E /* Pods_KeyStorage_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10087B25E043122911482C7E /* Pods_KeyStorage_Example.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3E8F305A1E17593000204F2A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
+			remoteInfo = KeyStorage_Example;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0BEE44F763E8EBDCD49AA19A /* KeyStorage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KeyStorage.podspec; path = ../KeyStorage.podspec; sourceTree = "<group>"; };
 		10087B25E043122911482C7E /* Pods_KeyStorage_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeyStorage_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F39979A4BBEA9E3DA8E1E2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		3E8F30551E17593000204F2A /* KeyStorage_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyStorage_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E8F30571E17593000204F2A /* KeyStorage_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStorage_Tests.swift; sourceTree = "<group>"; };
+		3E8F30591E17593000204F2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* KeyStorage_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyStorage_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +50,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3E8F30521E17593000204F2A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB519ABFEFBDE14B65C5CA12 /* Pods_KeyStorage_Tests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCD1AFB9204008FA782 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -46,11 +69,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3E8F30561E17593000204F2A /* KeyStorage_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3E8F30571E17593000204F2A /* KeyStorage_Tests.swift */,
+				3E8F30591E17593000204F2A /* Info.plist */,
+			);
+			path = KeyStorage_Tests;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for KeyStorage */,
+				3E8F30561E17593000204F2A /* KeyStorage_Tests */,
 				607FACD11AFB9204008FA782 /* Products */,
 				668360B5A7D709ABA979B8B6 /* Pods */,
 				A9D35714C026751A9325152D /* Frameworks */,
@@ -61,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* KeyStorage_Example.app */,
+				3E8F30551E17593000204F2A /* KeyStorage_Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +154,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3E8F30541E17593000204F2A /* KeyStorage_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3E8F305E1E17593000204F2A /* Build configuration list for PBXNativeTarget "KeyStorage_Tests" */;
+			buildPhases = (
+				A24F8C6CDF16A1A090C5F5D5 /* [CP] Check Pods Manifest.lock */,
+				3E8F30511E17593000204F2A /* Sources */,
+				3E8F30521E17593000204F2A /* Frameworks */,
+				3E8F30531E17593000204F2A /* Resources */,
+				0DEF64246B4F8F2FCAC98CF5 /* [CP] Embed Pods Frameworks */,
+				34C03A6F8C9A1C577E7A2DBB /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3E8F305B1E17593000204F2A /* PBXTargetDependency */,
+			);
+			name = KeyStorage_Tests;
+			productName = KeyStorage_Tests;
+			productReference = 3E8F30551E17593000204F2A /* KeyStorage_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		607FACCF1AFB9204008FA782 /* KeyStorage_Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "KeyStorage_Example" */;
@@ -146,10 +201,16 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
+					3E8F30541E17593000204F2A = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 57P6R83YCY;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 607FACCF1AFB9204008FA782;
+					};
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
 						LastSwiftMigration = 0820;
@@ -170,11 +231,19 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* KeyStorage_Example */,
+				3E8F30541E17593000204F2A /* KeyStorage_Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3E8F30531E17593000204F2A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCE1AFB9204008FA782 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -203,6 +272,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeyStorage_Example/Pods-KeyStorage_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		0DEF64246B4F8F2FCAC98CF5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeyStorage_Tests/Pods-KeyStorage_Tests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		1B82B94E32E354AC2082BD1C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,6 +300,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		34C03A6F8C9A1C577E7A2DBB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeyStorage_Tests/Pods-KeyStorage_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5EA1F5763664DD04FAB392A8 /* [CP] Copy Pods Resources */ = {
@@ -233,9 +332,32 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KeyStorage_Example/Pods-KeyStorage_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A24F8C6CDF16A1A090C5F5D5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3E8F30511E17593000204F2A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3E8F30581E17593000204F2A /* KeyStorage_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		607FACCC1AFB9204008FA782 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +368,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3E8F305B1E17593000204F2A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 607FACCF1AFB9204008FA782 /* KeyStorage_Example */;
+			targetProxy = 3E8F305A1E17593000204F2A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		607FACD91AFB9204008FA782 /* Main.storyboard */ = {
@@ -267,6 +397,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3E8F305C1E17593000204F2A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9612DB6E1DA4C5C0C8D95F40 /* Pods-KeyStorage_Tests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 57P6R83YCY;
+				INFOPLIST_FILE = KeyStorage_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencoding.KeyStorage-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeyStorage_Example.app/KeyStorage_Example";
+			};
+			name = Debug;
+		};
+		3E8F305D1E17593000204F2A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9F8E93534B3FA38431D30A23 /* Pods-KeyStorage_Tests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 57P6R83YCY;
+				INFOPLIST_FILE = KeyStorage_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bencoding.KeyStorage-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KeyStorage_Example.app/KeyStorage_Example";
+			};
+			name = Release;
+		};
 		607FACED1AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -387,6 +555,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3E8F305E1E17593000204F2A /* Build configuration list for PBXNativeTarget "KeyStorage_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E8F305C1E17593000204F2A /* Debug */,
+				3E8F305D1E17593000204F2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "KeyStorage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -1,16 +1,19 @@
 PODS:
-  - KeyStorage (0.1.0)
+  - KeyStorage (0.1.4)
+  - Nimble (5.0.0)
 
 DEPENDENCIES:
   - KeyStorage (from `../`)
+  - Nimble (~> 5.0.0)
 
 EXTERNAL SOURCES:
   KeyStorage:
     :path: ../
 
 SPEC CHECKSUMS:
-  KeyStorage: 6bf71e7e9191deea1bb065ac832e352638fbb03e
+  KeyStorage: f85dac5f44a790e72bc0a88b52c6705e594bf67e
+  Nimble: 56fc9f5020effa2206de22c3dd910f4fb011b92f
 
-PODFILE CHECKSUM: 0235689da41a5e64fb9482dac246e5fbf13ca70e
+PODFILE CHECKSUM: c22058b267b0c2daaceeeeca81998ad624cfb5e4
 
 COCOAPODS: 1.1.1

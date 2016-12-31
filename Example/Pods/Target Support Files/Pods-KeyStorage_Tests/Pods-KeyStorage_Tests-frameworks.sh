@@ -82,3 +82,12 @@ strip_invalid_archs() {
   fi
 }
 
+
+if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/KeyStorage/KeyStorage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble/Nimble.framework"
+fi
+if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "$BUILT_PRODUCTS_DIR/KeyStorage/KeyStorage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Nimble/Nimble.framework"
+fi
