@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = 'Simplifying securely working with key information'
   s.homepage         = 'https://github.com/benbahrenburg/KeyStorage'
   s.license          = 'MIT'
