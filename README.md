@@ -80,7 +80,7 @@ The KeyStoreDefaultsProvider can be created with the following optional argument
 let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup")
 ```
 
-* cryptoProvider : String
+* cryptoProvider : KeyStorageCrypter
 <br/>The encryption provider that will be used to encrypt and decrypt key values
 ```swift
 let provider = KeyStoreDefaultsProvider(cryptoProvider: myCryptoProvider)
@@ -91,6 +91,43 @@ let provider = KeyStoreDefaultsProvider(cryptoProvider: myCryptoProvider)
 
 ```swift
 let provider = KeyStoreDefaultsProvider(suiteName: "MyAppGroup", cryptoProvider: myCryptoProvider)
+```
+
+### KeyStorageKeyChainProvider
+The KeyStorageKeyChainProvider storage provider manages persistance to iOS Keychain.
+
+#### KeyStorageKeyChainProvider - Creation 
+
+The KeyStorageKeyChainProvider can be created with the following optional arguments.
+
+* serviceName : String
+<br/>The serviceName used to identify key values stored in the Keychain.
+```swift
+let provider = KeyStorageKeyChainProvider(serviceName: "myApp")
+```
+
+* accessGroup : String
+<br/>The Keychain Access Group used to identify key values stored in the Keychain. This must be implemented if you are using Keychain sharing.
+```swift
+let provider = KeyStorageKeyChainProvider(accessGroup: "myApp")
+```
+
+* cryptoProvider : KeyStorageCrypter
+<br/>The encryption provider that will be used to encrypt and decrypt key values
+```swift
+let provider = KeyStorageKeyChainProvider(cryptoProvider: myCryptoProvider)
+```
+
+* accessible : KeyChainInfo.accessibleOption
+<br/>The accessibility level of the values in the Keychain. See the Keychain documentation [here](https://developer.apple.com/library/content/documentation/Security/Conceptual/keychainServConcepts/02concepts/concepts.html) for details.
+```swift
+let provider = KeyStorageKeyChainProvider(accessible: .afterFirstUnlock)
+```
+
+* Combined Example
+<br/>You can combine all of the above as needed.  Below is an example of this fully implemented.
+```swift
+let provider = KeyStorageKeyChainProvider(serviceName: "myApp", accessGroup: "my-awesome-group", accessible: .afterFirstUnlockThisDeviceOnly, cryptoProvider: myCryptoProvider)
 ```
 
 ## KeychainHelpers
