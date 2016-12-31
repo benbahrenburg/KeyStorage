@@ -10,6 +10,8 @@ import Foundation
 
 public protocol KeyStorage {
     
+    var synchronizable: Bool {get set}
+    
     func getData(forKey: String) -> Data?
     
     func getString(forKey: String) -> String?
@@ -52,5 +54,7 @@ public protocol KeyStorage {
     @discardableResult func removeAllKeys() -> Bool
     
     func exists(forKey: String) -> Bool
+    
+    func synchronize()
     
 }

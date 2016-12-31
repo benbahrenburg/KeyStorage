@@ -76,13 +76,17 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     fileprivate var serviceName = Bundle.main.bundleIdentifier ?? "KeyStorageKeyChainProvider"
     fileprivate var crypter: KeyStorageCrypter?
     
-    public var synchronizable: Bool = false
+    public var synchronizable: Bool = true
     
     public init(serviceName: String? = nil, accessGroup: String? = nil, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
         self.accessGroup = accessGroup
         self.accessible = accessible
         self.serviceName = serviceName ?? self.serviceName
         self.crypter = cryptoProvider
+    }
+  
+    public func synchronize() {
+        synchronizable = true
     }
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {

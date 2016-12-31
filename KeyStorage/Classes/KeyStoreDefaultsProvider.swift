@@ -14,6 +14,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     fileprivate var usingEncryption: Bool = false
     
     var suiteName: String?
+    public var synchronizable: Bool = true
     
     public init(cryptoProvider: KeyStorageCrypter? = nil) {
         self.defaults = UserDefaults()
@@ -52,6 +53,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             }
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -61,6 +63,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -70,6 +73,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -79,6 +83,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -88,6 +93,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -97,6 +103,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value.timeIntervalSince1970))
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -107,6 +114,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveData(forKey: forKey, value: data)
         } else {
             defaults.set(value, forKey: forKey)
+            trySync()
         }
         return true
     }
@@ -171,7 +179,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             }
             return result.floatValue
         }
-
         return defaults.float(forKey: forKey)
     }
     
@@ -317,7 +324,16 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         } else {
             defaults.set(value, forKey: forKey)
         }
+        trySync()
         return true
+    }
+    
+    private func trySync() {
+        if synchronizable {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.synchronize()
+            }
+        }
     }
     
 }
