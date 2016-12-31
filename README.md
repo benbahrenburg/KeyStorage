@@ -1,5 +1,5 @@
 # KeyStorage
-Save key information quickly, easily, and securely.  KeyStorage is a type safe persistance layer built on top of the iOS KeyChain and NSUserDefaults.
+KeyStorage makes working with key information (passwords, preferences, etc) quick, easily and secure.  KeyStorage is a type safe persistance layer built on top of the iOS KeyChain and NSUserDefaults.
 
 ## Features
 
