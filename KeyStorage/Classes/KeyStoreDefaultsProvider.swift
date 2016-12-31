@@ -329,7 +329,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     }
     
     private func trySync() {
-        if synchronizable {
+        if self.synchronizable {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.synchronize()
             }
