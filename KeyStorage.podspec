@@ -1,11 +1,11 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '0.1.8'
+  s.version          = '0.1.9'
   s.summary          = 'KeyStorage is a simple secure key persistance library written in Swift.'
 
   s.description  = <<-DESC
-	Persistance passwords, preferences, and other key information quickly, easily and securely using the Keychain or NSUserDefaults.
+	Persist passwords, preferences, and other key information quickly, easily and securely using the Keychain or NSUserDefaults.
   DESC
 
   s.homepage         = 'https://github.com/benbahrenburg/KeyStorage'
