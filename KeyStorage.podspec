@@ -8,10 +8,10 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '0.1.1'
-  s.summary          = 'Simplifying securely saving key information'
+  s.version          = '0.1.2'
+  s.summary          = 'Simplifying securely working with key information'
   s.description      = <<-DESC
-Simplifying securely saving key information.  An easy lite key persistance framework for the iOS KeyChain and NSUserDefaults.
+KeyStorage makes working with key information (passwords, preferences, etc) quick, easily and secure. KeyStorage is a type safe persistance layer built on top of the iOS KeyChain and NSUserDefaults.
                        DESC
 
   s.homepage         = 'https://github.com/benbahrenburg/KeyStorage'

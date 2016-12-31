@@ -78,22 +78,10 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     
     public var synchronizable: Bool = false
     
-    public init(serviceName: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
-        self.serviceName = serviceName
-        self.accessible = accessible
-        self.crypter = cryptoProvider
-    }
-    
-    public init(accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
+    public init(serviceName: String? = nil, accessGroup: String? = nil, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
         self.accessGroup = accessGroup
         self.accessible = accessible
-        self.crypter = cryptoProvider
-    }
-    
-    public init(serviceName: String, accessGroup: String, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
-        self.accessGroup = accessGroup
-        self.accessible = accessible
-        self.serviceName = serviceName
+        self.serviceName = serviceName ?? self.serviceName
         self.crypter = cryptoProvider
     }
     

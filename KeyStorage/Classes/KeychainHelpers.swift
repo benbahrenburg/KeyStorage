@@ -9,15 +9,15 @@
 import Foundation
 import Security
 
-open class KeyChainAccessGroupHelper {
+public struct KeyChainAccessGroupInfo {
+    public var prefix: String
+    public var keyChainGroup: String
+    public var rawValue: String
+}
+
+open class KeychainHelpers {
     
-    public struct accessGroupInfo {
-        public var prefix: String
-        public var keyChainGroup: String
-        public var rawValue: String
-    }
-    
-    public class func getAccessGroupInfo() -> accessGroupInfo? {
+    public class func getAccessGroupInfo() -> KeyChainAccessGroupInfo? {
         let query: [String:Any] = [
             kSecClass as String : kSecClassGenericPassword,
             kSecAttrAccount as String : "detectAppIdentifierForKeyChainGroupIdUsage",
@@ -37,13 +37,14 @@ open class KeyChainAccessGroupHelper {
         guard status == errSecSuccess else { return nil }
         
         let accessGroup = ((dataTypeRef as! [AnyHashable: Any])[(kSecAttrAccessGroup as String)] as! String)
+        
         if accessGroup.components(separatedBy: ".").count > 0 {
             let components = accessGroup.components(separatedBy: ".")
             let prefix = components.first!
             let elements = components.filter() { $0 != prefix }
             let keyChainGroup = elements.joined(separator: ".")
             
-            return accessGroupInfo(prefix: prefix, keyChainGroup: keyChainGroup, rawValue: accessGroup)
+            return KeyChainAccessGroupInfo(prefix: prefix, keyChainGroup: keyChainGroup, rawValue: accessGroup)
         }
         
         return nil
