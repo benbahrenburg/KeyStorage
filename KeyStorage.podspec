@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'Simplifying securely working with key information'
   s.description      = <<-DESC
 KeyStorage makes working with key information (passwords, preferences, etc) quick, easily and secure. KeyStorage is a type safe persistance layer built on top of the iOS KeyChain and NSUserDefaults.
@@ -17,7 +17,7 @@ KeyStorage makes working with key information (passwords, preferences, etc) quic
   s.homepage         = 'https://github.com/benbahrenburg/KeyStorage'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Ben Bahrenburg' => '@bencoding' }
+  s.author           = { 'Ben Bahrenburg' => 'hello@bencoding.com' }
   s.source           = { :git => 'https://github.com/benbahrenburg/KeyStorage.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/bencoding'
 
