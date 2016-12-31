@@ -8,6 +8,12 @@
 
 import Foundation
 
+
+/**
+ 
+ Storage Provider that saves/reads keys from the NSUserDefaults
+ 
+ */
 public final class KeyStoreDefaultsProvider: KeyStorage {
     fileprivate var defaults: UserDefaults
     fileprivate var crypter: KeyStorageCrypter?

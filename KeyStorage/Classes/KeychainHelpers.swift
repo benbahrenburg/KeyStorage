@@ -9,15 +9,19 @@
 import Foundation
 import Security
 
-public struct KeyChainAccessGroupInfo {
-    public var prefix: String
-    public var keyChainGroup: String
-    public var rawValue: String
-}
-
+/**
+ 
+ Keychain utilities
+ 
+ */
 open class KeychainHelpers {
-    
-    public class func getAccessGroupInfo() -> KeyChainAccessGroupInfo? {
+
+    /**
+     Used to programmatically determine information related to Keychain Groups.
+     
+     - Returns: AccessGroupInfo? (optional) containing information related to the Keychain Group
+     */
+    public class func getAccessGroupInfo() -> KeyChainInfo.AccessGroupInfo? {
         let query: [String:Any] = [
             kSecClass as String : kSecClassGenericPassword,
             kSecAttrAccount as String : "detectAppIdentifierForKeyChainGroupIdUsage",
@@ -44,7 +48,7 @@ open class KeychainHelpers {
             let elements = components.filter() { $0 != prefix }
             let keyChainGroup = elements.joined(separator: ".")
             
-            return KeyChainAccessGroupInfo(prefix: prefix, keyChainGroup: keyChainGroup, rawValue: accessGroup)
+            return KeyChainInfo.AccessGroupInfo(prefix: prefix, keyChainGroup: keyChainGroup, rawValue: accessGroup)
         }
         
         return nil

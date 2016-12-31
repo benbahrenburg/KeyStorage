@@ -19,9 +19,21 @@ KeyStorage is a simple secure key persistance library written in Swift.  Persist
 KeyStorage is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+
 ```ruby
 pod "KeyStorage"
 ```
+
+__Carthage__
+
+```
+github "benbahrenburg/KeyStorage"
+```
+
+__Manually__
+
+Copy all `*.swift` files contained in `KeyStorage/Classes/` directory into your project. 
+
 
 ## Usage
 
