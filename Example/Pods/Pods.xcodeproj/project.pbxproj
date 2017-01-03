@@ -403,8 +403,8 @@
 			children = (
 				3E0DF1241E18215600E966D2 /* KeyChainInfo.swift */,
 				924ADE36E422CE9A1DAC2EB67DACAEF4 /* KeychainHelpers.swift */,
-				82E292022B23460919817E8EE17FA519 /* KeyStorage.swift */,
 				7A8510DF038948EABD99E5BB0C623FC9 /* KeyStorageCrypter.swift */,
+				82E292022B23460919817E8EE17FA519 /* KeyStorage.swift */,
 				B41C70AE63BE7E100485194FB948E988 /* KeyStorageKeyChainProvider.swift */,
 				CF02246E78D78D8BA91B2542F5E3F580 /* KeyStoreDefaultsProvider.swift */,
 			);

@@ -14,9 +14,6 @@ import Foundation
  
  */
 public protocol KeyStorage {
-    
-    /// Synchronizable is a flag used to determine if KeyStore values should be synchronized
-    var synchronizable: Bool {get set}
 
     /**
         Returns Data? (optional) for a provided key. Nil is returned if no stored value is found.
@@ -160,17 +157,104 @@ public protocol KeyStorage {
      - Returns: NSDictionary? (optional) for the provided key
      */
     func getDictionary(forKey: String) -> NSDictionary?
-    
+
+    /**
+     Saves an URL to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setURL(forKey: String, value: URL) -> Bool
+    
+    /**
+     Saves a Float to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setFloat(forKey: String, value: Float) -> Bool
+   
+    /**
+     Saves a Double to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setDouble(forKey: String, value: Double) -> Bool
+    
+    /**
+     Saves an object that conforms to NSCoding to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setObject(forKey: String, value: NSCoding) -> Bool
+    
+    /**
+     Saves a Data to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setData(forKey: String, value: Data) -> Bool
+
+    /**
+     Saves a String to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setString(forKey: String, value: String) -> Bool
+    
+    /**
+     Saves an Int to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setInt(forKey: String, value: Int) -> Bool
+    
+    /**
+     Saves a Boolean to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setBool(forKey: String, value: Bool) -> Bool
+    
+    /**
+     Saves a Date to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setDate(forKey: String, value: Date) -> Bool
+
+    /**
+     Saves an NSArray to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setArray(forKey: String, value: NSArray) -> Bool
+    
+    /**
+     Saves a NSDictionary to the provider's storage method, ie keychain, NSUserDefaults, etc.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult func setDictionary(forKey: String, value: NSDictionary) -> Bool
 
     /**
@@ -195,8 +279,5 @@ public protocol KeyStorage {
      - Returns: Bool is returned true if a stored value exists or false if there is no stored value.
      */
     func exists(forKey: String) -> Bool
-    
-    /// synchronize updates the storage provider's synchronization status. This behavior is specific to each provider.
-    func synchronize()
     
 }

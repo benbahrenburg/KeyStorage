@@ -19,8 +19,8 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     fileprivate var crypter: KeyStorageCrypter?
     fileprivate var usingEncryption: Bool = false
     
+    /// the suiteName set when the provider was initialized
     var suiteName: String?
-    public var synchronizable: Bool = true
     
     public init(cryptoProvider: KeyStorageCrypter? = nil) {
         self.defaults = UserDefaults()
@@ -34,11 +34,13 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         self.defaults = UserDefaults(suiteName: suiteName)!
         self.usingEncryption = cryptoProvider != nil
     }
-    
-    public func synchronize() {
-        defaults.synchronize()
-    }
-    
+
+    /**
+     Returns a Bool indicating if a stored value exists for the provided key.
+     
+     - Parameter forKey: The key to check if there is a stored value for.
+     - Returns: Bool is returned true if a stored value exists or false if there is no stored value.
+     */
     public func exists(forKey: String) -> Bool {
         defaults.synchronize()
         if let _ = defaults.object(forKey: forKey) {
@@ -46,7 +48,13 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         }
         return false
     }
-    
+
+    /**
+     Removes the stored value for the provided key.
+     
+     - Parameter forKey: The key that should have it's stored value removed
+     - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
+     */
     @discardableResult public func removeKey(forKey: String) -> Bool {
         defaults.removeObject(forKey: forKey)
         return true
@@ -59,7 +67,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             }
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -69,7 +76,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -79,7 +85,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -89,7 +94,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -99,7 +103,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value))
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -109,7 +112,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveObject(forKey: forKey, value: NSNumber(value: value.timeIntervalSince1970))
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -120,7 +122,6 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return saveData(forKey: forKey, value: data)
         } else {
             defaults.set(value, forKey: forKey)
-            trySync()
         }
         return true
     }
@@ -128,7 +129,13 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     @discardableResult public func setData(forKey: String, value: Data) -> Bool {
         return saveData(forKey: forKey, value: value)
     }
-    
+
+    /**
+     Returns String? (optional) for a provided key. Nil is returned if no stored value is found.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Returns: The String? (optional) for the provided key
+     */
     public func getString(forKey: String) -> String? {
         if usingEncryption {
             if let data = load(forKey: forKey) {
@@ -138,7 +145,14 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         }
         return defaults.string(forKey: forKey)
     }
-    
+
+    /**
+     Returns String for a provided key. If no stored value is available, defaultValue is returned.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Parameter defaultValue: The value to be returned if no stored value is available
+     - Returns: The String for the provided key
+     */
     public func getString(forKey: String, defaultValue: String) -> String {
         guard exists(forKey: forKey) else { return defaultValue }
         
@@ -206,7 +220,14 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         
         return NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? NSArray
     }
-    
+ 
+    /**
+     Saves an NSArray to NSUserDefaults.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult public func setArray(forKey: String, value: NSArray) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
@@ -220,7 +241,14 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         
         return NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? NSDictionary
     }
-    
+
+    /**
+     Saves a NSDictionary to NSUserDefaults.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult public func setDictionary(forKey: String, value: NSDictionary) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
@@ -279,7 +307,13 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         }
         return defaultValue
     }
-    
+
+    /**
+     Returns Data? (optional) for a provided key. Nil is returned if no stored value is found.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Returns: The Data? (optional) for the provided key
+     */
     public func getData(forKey: String) -> Data? {
         return load(forKey: forKey)
     }
@@ -290,7 +324,12 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         }
         return defaultValue
     }
-    
+ 
+    /**
+     Removes all of the keys stored with the provider
+     
+     - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
+     */
     @discardableResult public func removeAllKeys() -> Bool {
         if let suiteName = suiteName {
             defaults.removeSuite(named: suiteName)
@@ -330,16 +369,7 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         } else {
             defaults.set(value, forKey: forKey)
         }
-        trySync()
         return true
-    }
-    
-    private func trySync() {
-        if self.synchronizable {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.synchronize()
-            }
-        }
     }
     
 }

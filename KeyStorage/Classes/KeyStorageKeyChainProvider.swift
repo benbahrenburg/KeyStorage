@@ -20,20 +20,16 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     fileprivate var accessible = KeyChainInfo.accessibleOption.afterFirstUnlock
     fileprivate var serviceName = Bundle.main.bundleIdentifier ?? "KeyStorageKeyChainProvider"
     fileprivate var crypter: KeyStorageCrypter?
+    fileprivate var synchronizable: Bool = true
     
-    public var synchronizable: Bool = true
-    
-    public init(serviceName: String? = nil, accessGroup: String? = nil, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil) {
+    public init(serviceName: String? = nil, accessGroup: String? = nil, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil, synchronizable: Bool = true) {
         self.accessGroup = accessGroup
         self.accessible = accessible
         self.serviceName = serviceName ?? self.serviceName
         self.crypter = cryptoProvider
+        self.synchronizable = synchronizable
     }
   
-    public func synchronize() {
-        synchronizable = true
-    }
-    
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
@@ -90,7 +86,13 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     @discardableResult public func setBool(forKey: String, value: Bool) -> Bool {
         return saveObject(forKey: forKey, value: NSNumber(value: value))
     }
-    
+
+    /**
+     Removes the stored value for the provided key.
+     
+     - Parameter forKey: The key that should have it's stored value removed
+     - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
+     */
     @discardableResult public func removeKey(forKey: String) -> Bool {
         let query = buildQuery(forKey: forKey)
         let status = SecItemDelete(query as CFDictionary)
@@ -102,16 +104,34 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         }
         return true
     }
-    
+ 
+    /**
+     Returns a Bool indicating if a stored value exists for the provided key.
+     
+     - Parameter forKey: The key to check if there is a stored value for.
+     - Returns: Bool is returned true if a stored value exists or false if there is no stored value.
+     */
     public func exists(forKey: String) -> Bool {
         let results = load(forKey: forKey)
         return results != nil
     }
-    
+
+    /**
+     Returns Data? (optional) for a provided key. Nil is returned if no stored value is found.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Returns: The Data? (optional) for the provided key
+     */
     public func getData(forKey: String) -> Data? {
         return load(forKey: forKey)
     }
-    
+
+    /**
+     Returns String? (optional) for a provided key. Nil is returned if no stored value is found.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Returns: The String? (optional) for the provided key
+     */
     public func getString(forKey: String) -> String? {
         if let data = load(forKey: forKey) {
             return String(data: data, encoding: String.Encoding.utf8)
@@ -119,7 +139,14 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         return nil
     }
-    
+
+    /**
+     Returns String for a provided key. If no stored value is available, defaultValue is returned.
+     
+     - Parameter forKey: The key used to return a stored value
+     - Parameter defaultValue: The value to be returned if no stored value is available
+     - Returns: The String for the provided key
+     */
     public func getString(forKey: String, defaultValue: String) -> String {
         if let data = load(forKey: forKey) {
             return String(data: data, encoding: String.Encoding.utf8)!
@@ -205,7 +232,12 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         }
         return Date(timeIntervalSince1970: TimeInterval(result))
     }
-    
+
+    /**
+     Removes all of the keys stored with the provider
+     
+     - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
+     */
     @discardableResult public func removeAllKeys() -> Bool {
         var query: [String:Any] = [kSecClass as String: kSecClassGenericPassword]
         query[kSecAttrService as String] = serviceName
@@ -234,7 +266,14 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         return NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? NSArray
     }
-    
+
+    /**
+     Saves an NSArray to the keychain.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult public func setArray(forKey: String, value: NSArray) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
@@ -247,7 +286,14 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         return NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? NSDictionary
     }
-    
+
+    /**
+     Saves a NSDictionary to the keychain.
+     
+     - Parameter forKey: The key to be used when saving the provided value
+     - Parameter value: The value to be saved
+     - Returns: True if saved successfully, false if the provider was not able to save successfully
+     */
     @discardableResult public func setDictionary(forKey: String, value: NSDictionary) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)

@@ -13,6 +13,7 @@ KeyStorage is a simple secure key persistance library written in Swift.  Persist
 
 * Xcode 8.2 or newer
 * Swift 3.0
+* iOS 9 or greater
 
 ## Installation
 
@@ -44,6 +45,56 @@ There are five main classes in KeyStorage:
 3. KeyStorageKeyChainProvider - A keychain implementation of the KeyStorage protocol
 4. KeyStoreDefaultsProvider -  A NSUserDefaults implementation of the KeyStorage protocol
 5. KeychainHelpers - Tools for workign with the iOS keychain
+
+## Examples
+
+The KeyStorage githib wiki contains detailed examples of each method.  Below demonstrates a few of the common uses to get you started.
+
+### Using NSUserDefault Storage Provider
+
+The KeyStoreDefaultsProvider Storage Provider will read / write information from NSUserDefaults using the configuration options provided when the class is initialized.  See the creation section below for more details on the available configuration options.
+
+```swift
+// Create an instance of the NSDefaults Storage Provider
+// You can provide several options on creation. For this example we keep it simple
+let provider = KeyStoreDefaultsProvider()
+
+// This will return the default value as we haven't set anything yet
+let demoString = provider.getString(forKey: "my-string", defaultValue: "Hello I'm a default value")
+print("Demo default value \(demoString)")
+
+// Now let's set the value
+provider.setString(forKey: "my-string", value: "Hello World")
+
+// Saving an Int Value
+provider.setInt(forKey: "my-int", value: 42)
+let demoInt = provider.getInt(forKey: "my-int")
+print("Demo Int value \(demoInt)")
+```
+
+### Using Keychain Storage Provider
+
+The KeyStorageKeyChainProvider Storage Provider will read / write information from Keychain using the configuration options provided when the class is initialized.  See the creation section below for more details on the available configuration options.
+
+```swift
+// Create an instance of the Keychain Storage Provider
+// You can provide several options on creation. 
+//For this example we provide a serviceName and accessible level
+let provider = KeyStorageKeyChainProvider(serviceName: "my-app", accessible: .afterFirstUnlockThisDeviceOnly)
+
+// This will return the default value as we haven't set anything yet
+let doubleDemo = provider.getDouble(forKey: "my-double", defaultValue: 123.45)
+print("Demo default value \(doubleDemo)")
+
+// Now let's set the value
+provider.setDouble(forKey: "my-double", value: 99.99)
+
+// Saving an Date Value
+provider.setDate(forKey: "my-date", value: Date())
+let demoDate = provider.getDate(forKey: "my-date")!
+print(" demo Date value \(demoDate)")
+
+```
 
 ## Save Options
 
