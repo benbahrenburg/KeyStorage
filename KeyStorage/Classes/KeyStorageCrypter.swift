@@ -22,16 +22,16 @@ public protocol KeyStorageCrypter {
      
      - Parameter forKey: The key for the data element that should be encrypted.
      - Parameter data: The Data that should be encrypted
-     - Returns: The Data in encrypted form. This will be persisted by the Storage Provider.
+     - Returns: The Data (optional) in encrypted form. This will be persisted by the Storage Provider.
      */
-    func encrypt(data: Data, forKey: String) -> Data
+    func encrypt(data: Data, forKey: String) -> Data?
     
     /**
      Returns an unencrypted Data type
      
      - Parameter forKey: The key for the data element that should be decrypted.
      - Parameter data: The Data that should be decrypted
-     - Returns: The Data in decrypted form. This will be converted to one of the supported types and returned to the caller.
+     - Returns: The Data (optional) in decrypted form. This will be converted to one of the supported types and returned to the caller.
      */
-    func decrypt(data: Data, forKey: String) -> Data
+    func decrypt(data: Data, forKey: String) -> Data?
 }
