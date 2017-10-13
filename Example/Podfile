@@ -6,7 +6,7 @@ target 'KeyStorage_Example' do
   target 'KeyStorage_Tests' do
     inherit! :search_paths
     pod 'KeyStorage', :path => '../'
-    pod 'Nimble', '~> 5.0.0'
+    pod 'Nimble'
 
   end
 end

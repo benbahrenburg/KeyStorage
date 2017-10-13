@@ -1,23 +1,21 @@
 {
   "name": "KeyStorage",
-  "version": "0.1.4",
-  "summary": "Simplifying securely working with key information",
-  "description": "KeyStorage makes working with key information (passwords, preferences, etc) quick, easily and secure. KeyStorage is a type safe persistance layer built on top of the iOS KeyChain and NSUserDefaults.",
+  "version": "0.2.4",
+  "summary": "KeyStorage is a simple secure key persistance library written in Swift.",
+  "description": "Persist passwords, preferences, and other key information quickly, easily and securely using the Keychain or NSUserDefaults.",
   "homepage": "https://github.com/benbahrenburg/KeyStorage",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
+  "license": "MIT",
   "authors": {
-    "Ben Bahrenburg": "@bencoding"
+    "Ben Bahrenburg": "hello@bencoding.com"
   },
   "source": {
     "git": "https://github.com/benbahrenburg/KeyStorage.git",
-    "tag": "0.1.4"
+    "tag": "0.2.4"
   },
   "social_media_url": "https://twitter.com/bencoding",
   "platforms": {
-    "ios": "9.0"
+    "ios": "10.0",
+    "watchos": "4.0"
   },
   "source_files": "KeyStorage/Classes/**/*"
 }

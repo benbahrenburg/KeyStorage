@@ -223,14 +223,14 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         guard let result = getObject(forKey: forKey) as? NSNumber else {
             return nil
         }
-        return Date(timeIntervalSince1970: TimeInterval(result))
+        return Date(timeIntervalSince1970: TimeInterval(truncating: result))
     }
     
     public func getDate(forKey: String, defaultValue: Date) -> Date {
         guard let result = getObject(forKey: forKey) as? NSNumber else {
             return defaultValue
         }
-        return Date(timeIntervalSince1970: TimeInterval(result))
+        return Date(timeIntervalSince1970: TimeInterval(truncating: result))
     }
 
     /**
