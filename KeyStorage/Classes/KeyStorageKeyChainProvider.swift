@@ -94,7 +94,7 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
      - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
      */
     @discardableResult public func removeKey(forKey: String) -> Bool {
-        let query = buildQuery(forKey: forKey)
+        let query = buildQuery(forKey)
         let status = SecItemDelete(query as CFDictionary)
         guard status != errSecItemNotFound else { return true }
         if status != errSecSuccess {
@@ -312,19 +312,7 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         return saveData(forKey: forKey, value: data)
     }
     
-    private func saveData(forKey: String, value: Data) -> Bool {
-        var query = buildQuery(forKey: forKey)
-        
-        if let crypto = self.crypter {
-            query[kSecValueData as String] = crypto.encrypt(data: value, forKey: forKey)
-        } else {
-            query[kSecValueData as String] = value
-        }
-    
-        SecItemDelete(query as CFDictionary)
-        
-        let status: OSStatus = SecItemAdd(query as CFDictionary, nil)
-        
+    private func handleResultStatus(forKey: String, status: OSStatus) -> Bool {
         if status != errSecSuccess {
             let error = KeyChainInfo.errorDetail.unhandledError(status: status).localizedDescription
             print("Error Saving key \(forKey) to keychain. Error: \(error) ")
@@ -333,8 +321,27 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         return true
     }
     
+    private func saveData(forKey: String, value: Data) -> Bool {
+        let query = buildQuery(forKey)
+        
+        if let crypto = self.crypter {
+            query[kSecValueData as String] = crypto.encrypt(data: value, forKey: forKey)
+        } else {
+            query[kSecValueData as String] = value
+        }
+    
+        if SecItemCopyMatching(query, nil) == noErr {
+            let status = SecItemUpdate(query, NSDictionary(dictionary: [kSecValueData: value]))
+            return handleResultStatus(forKey: forKey, status: status)
+        }
+        
+        let status = SecItemAdd(query, nil)
+        return handleResultStatus(forKey: forKey, status: status)
+
+    }
+    
     private func load(forKey: String) -> Data? {
-        var query = buildQuery(forKey: forKey)
+        let query = buildQuery(forKey)
         // Setup parameters needed to return value from query
         query[kSecMatchLimit as String] = kSecMatchLimitOne
         query[kSecReturnData as String] = kCFBooleanTrue
@@ -353,10 +360,11 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         return nil
     }
-    
-    private func buildQuery(forKey: String) -> [String:Any] {
+
+    private func buildQuery(_ forKey: String) -> NSMutableDictionary {
         // Setup default access as generic password (rather than a certificate, internet password, etc)
-        var query: [String:Any] = [kSecClass as String: kSecClassGenericPassword]
+        let query = NSMutableDictionary()
+        query.setValue(kSecClassGenericPassword, forKey: kSecClass as String)
         
         //Add Service Name
         query[kSecAttrService as String] = serviceName
@@ -375,5 +383,4 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         
         return query
     }
-    
 }
