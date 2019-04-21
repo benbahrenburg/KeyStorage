@@ -26,7 +26,7 @@ open class KeychainHelpers {
             kSecClass as String : kSecClassGenericPassword,
             kSecAttrAccount as String : "detectAppIdentifierForKeyChainGroupIdUsage",
             kSecAttrAccessible as String: kSecAttrAccessibleAlwaysThisDeviceOnly,
-            kSecReturnAttributes as String : kCFBooleanTrue
+            kSecReturnAttributes as String : kCFBooleanTrue!
         ]
         
         var dataTypeRef: AnyObject?
