@@ -15,12 +15,12 @@ import Security
  
  */
 public final class KeyStorageKeyChainProvider: KeyStorage {
-    
-    fileprivate var accessGroup: String?
-    fileprivate var accessible = KeyChainInfo.accessibleOption.afterFirstUnlock
-    fileprivate var serviceName = Bundle.main.bundleIdentifier ?? "KeyStorageKeyChainProvider"
-    fileprivate var crypter: KeyStorageCrypter?
-    fileprivate var synchronizable: Bool = true
+    private let lock = NSLock()
+    private var accessGroup: String?
+    private var accessible = KeyChainInfo.accessibleOption.afterFirstUnlock
+    private var serviceName = Bundle.main.bundleIdentifier ?? "KeyStorageKeyChainProvider"
+    private var crypter: KeyStorageCrypter?
+    private var synchronizable: Bool = true
     
     public init(serviceName: String? = nil, accessGroup: String? = nil, accessible: KeyChainInfo.accessibleOption = .afterFirstUnlock, cryptoProvider: KeyStorageCrypter? = nil, synchronizable: Bool = true) {
         self.accessGroup = accessGroup
@@ -94,6 +94,8 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
      - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
      */
     @discardableResult public func removeKey(forKey: String) -> Bool {
+        lock.lock()
+        defer { lock.unlock() }
         let query = buildQuery(forKey)
         let status = SecItemDelete(query as CFDictionary)
         guard status != errSecItemNotFound else { return true }
@@ -239,6 +241,10 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
      - Returns: Bool is returned with the status of the removal operation. True for success, false for error.
      */
     @discardableResult public func removeAllKeys() -> Bool {
+        
+        lock.lock()
+        defer { lock.unlock() }
+        
         var query: [String:Any] = [kSecClass as String: kSecClassGenericPassword]
         query[kSecAttrService as String] = serviceName
         
@@ -322,6 +328,10 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     }
     
     private func saveData(forKey: String, value: Data) -> Bool {
+        
+        lock.lock()
+        defer { lock.unlock() }
+        
         let query = buildQuery(forKey)
         
         if let crypto = self.crypter {
