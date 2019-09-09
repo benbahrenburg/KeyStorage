@@ -315,9 +315,11 @@
 		2222961B03382AF387376D23F5DBE6E3 /* KeyStorage */ = {
 			isa = PBXGroup;
 			children = (
-				3E1BA22F232605D800F70408 /* Utils */,
-				3E1BA22E232605B700F70408 /* Providers */,
+				2F94886F33AF52BD3879534C1D26F452 /* KeychainHelpers.swift */,
 				E42468887E486703C398C5113136D3B9 /* KeyChainInfo.swift */,
+				4D73CDCE61163BB91DE2548B196FFC94 /* KeyStoreDefaultsProvider.swift */,
+				1BD8EDD0935BD8A85505D48FE98DEE30 /* KeyStorageKeyChainProvider.swift */,
+				3E1BA22C2326006B00F70408 /* KeyStoreUbiquitousProvider.swift */,
 				B00CC77F9265F1427635D0AC71E99C15 /* KeyStorage.swift */,
 				625573115FF7A82FCE1F9F5973A9ECF9 /* KeyStorageCrypter.swift */,
 				F577A5C4C5AC5389A5AC8A4C3376337C /* Pod */,
@@ -345,24 +347,6 @@
 				87F803D11202AF0F08528A85462A87A0 /* Pods-KeyStorage_Tests */,
 			);
 			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		3E1BA22E232605B700F70408 /* Providers */ = {
-			isa = PBXGroup;
-			children = (
-				4D73CDCE61163BB91DE2548B196FFC94 /* KeyStoreDefaultsProvider.swift */,
-				1BD8EDD0935BD8A85505D48FE98DEE30 /* KeyStorageKeyChainProvider.swift */,
-				3E1BA22C2326006B00F70408 /* KeyStoreUbiquitousProvider.swift */,
-			);
-			path = Providers;
-			sourceTree = "<group>";
-		};
-		3E1BA22F232605D800F70408 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				2F94886F33AF52BD3879534C1D26F452 /* KeychainHelpers.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		76438BB7CF8DC7B15304494D5BCB8A35 /* Pods */ = {
