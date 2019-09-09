@@ -10,7 +10,6 @@
 		03705FCE353B9A436320B5798C9F7A50 /* ContainElementSatisfying.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E375FCE46FFBD47D3AD3BB5DFB89FC /* ContainElementSatisfying.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		05D6872E1E4C28423550C859B6E03820 /* CwlMachBadInstructionHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 7252C6A5D5329A16073954C9E295BDAD /* CwlMachBadInstructionHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		075311A9B30D68479A7D7404A99B2FB1 /* NMBExpectation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCC3E9E0D5C496DFC55A0FFDD27CFD41 /* NMBExpectation.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		086C7F4434A6156EDBDF4DD081D5F01B /* KeyStoreDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D73CDCE61163BB91DE2548B196FFC94 /* KeyStoreDefaultsProvider.swift */; };
 		0999B997CDAC772A41A7F70CEF4A1D49 /* BeginWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB3A1350FD850D5DB3237AFC14B644 /* BeginWith.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		0F31FA39DE65E4B1F239F8D4DC999A8A /* SourceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A37EA0F7679214145650FAAA2A675B /* SourceLocation.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		13FBB20EA4647EA46F0CB2E7254A5F50 /* NMBObjCMatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F186D1A0C1C9168458ADF6F3B197FDB5 /* NMBObjCMatcher.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -29,7 +28,10 @@
 		38FEA25D16ACC1E6F5C696CD95B41A69 /* CwlPreconditionTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = EE5AEEC1D21B90EC8133D213563E4714 /* CwlPreconditionTesting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3915EE0EE0A228F82B7F8B2E298AF596 /* KeyStorageCrypter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 625573115FF7A82FCE1F9F5973A9ECF9 /* KeyStorageCrypter.swift */; };
 		392B6696BC59BDCD988D7C5DF3E3E1C5 /* NMBStringify.m in Sources */ = {isa = PBXBuildFile; fileRef = 547E13B2156EB88650353C153FF55AD4 /* NMBStringify.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		3E1BA22D2326006B00F70408 /* KeyStoreUbiquitousProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BA22C2326006B00F70408 /* KeyStoreUbiquitousProvider.swift */; };
+		3E1BA23423260CA300F70408 /* KeyStorageKeyChainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BA23023260CA200F70408 /* KeyStorageKeyChainProvider.swift */; };
+		3E1BA23523260CA300F70408 /* KeyStoreDefaultsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BA23123260CA300F70408 /* KeyStoreDefaultsProvider.swift */; };
+		3E1BA23623260CA300F70408 /* KeyStoreUbiquitousProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BA23223260CA300F70408 /* KeyStoreUbiquitousProvider.swift */; };
+		3E1BA23723260CA300F70408 /* KeychainHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BA23323260CA300F70408 /* KeychainHelpers.swift */; };
 		40F8F4BAA1484B33FE5F6B28CC1C2C40 /* KeyStorage-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 31BB249B2476B182CB1BD74008DBE0B1 /* KeyStorage-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42203C181E5B168D7952FE7B189A5C8F /* KeyStorage-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E00C7FDC5603E64445F6F225E3A1E /* KeyStorage-dummy.m */; };
 		423FBB853739D2BA9022BA2EECA8159A /* KeyChainInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42468887E486703C398C5113136D3B9 /* KeyChainInfo.swift */; };
@@ -60,7 +62,6 @@
 		89D30C28183DF9BFC6C940211DA889D7 /* BeLessThanOrEqual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96EC5BEF052532CCA1FD6EB89BE1A1A0 /* BeLessThanOrEqual.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		94C84E6DFA71C70DF521E9D995C1505F /* BeVoid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90F4521C96C66703F3F73F40D47F62A0 /* BeVoid.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		966FBB84C847F2BCAED02AA147A2CFAB /* MatcherFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E661CF334DD88E3C14E8DBDE07AFFC3C /* MatcherFunc.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
-		991D2F8075365420703B1498125786CC /* KeychainHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F94886F33AF52BD3879534C1D26F452 /* KeychainHelpers.swift */; };
 		9C3F7FC69ADC5BFCE26D5BCB0B9234C6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D767EBE3E2AA8E76A31336844F595C /* Errors.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		9DB1E08337AC3FF955539F4E0D1074D2 /* PostNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA78ABD24411A49CFAA6783A3F416BB /* PostNotification.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		9EEF9E84E580920E11E06170D25F65C3 /* DSL.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD11B4AE7141D820757F024A68320EF /* DSL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -72,7 +73,6 @@
 		B60B10B591B547CBA9E899F77B22591E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB4607EFCA7C5F75397649E792E2AFCB /* Foundation.framework */; };
 		B836AB3DB63144FE21C715D2944AEA07 /* NMBExceptionCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = C92AEA0C5062B3D49468A793AB84CCE0 /* NMBExceptionCapture.m */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C0367D0510CE9E409A33E9B356422017 /* Nimble-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E9CED15CB153D79433BA083147A5537 /* Nimble-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C3B33FCEAB7ABFC0A60857C9C7DEBDD8 /* KeyStorageKeyChainProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD8EDD0935BD8A85505D48FE98DEE30 /* KeyStorageKeyChainProvider.swift */; };
 		C56CE025F6E708D6F5F11DB4EA23728C /* MatcherProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027960FCC2B156076DF6FC5E9A59B481 /* MatcherProtocols.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C5808A46FC4C07F235753E2AE4A7511A /* mach_excServer.c in Sources */ = {isa = PBXBuildFile; fileRef = 0EF7F3BB9BF811AF578E15830CBA5C6A /* mach_excServer.c */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
 		C7B9D1E45DDA944F4C7E372D3A20999C /* Stringers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BEA7AA7BECFB8D133D6479FA15164E /* Stringers.swift */; settings = {COMPILER_FLAGS = "-DPRODUCT_NAME=Nimble/Nimble"; }; };
@@ -144,7 +144,6 @@
 		17890A46C198BCA2DF3FEBCC04AB4168 /* Pods-KeyStorage_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KeyStorage_Tests-umbrella.h"; sourceTree = "<group>"; };
 		17BB3023F528320A845586DC30148B42 /* Pods-KeyStorage_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-KeyStorage_Example.release.xcconfig"; sourceTree = "<group>"; };
 		1B09352F8AE3EBF057DC515058D74D9A /* Pods_KeyStorage_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeyStorage_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1BD8EDD0935BD8A85505D48FE98DEE30 /* KeyStorageKeyChainProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeyStorageKeyChainProvider.swift; sourceTree = "<group>"; };
 		1D5AEBDA98BA867C56B7AC12D39441F8 /* Predicate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Predicate.swift; path = Sources/Nimble/Matchers/Predicate.swift; sourceTree = "<group>"; };
 		1E49E69465771AA775D3250EA334DA8C /* DSL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = DSL.m; path = Sources/NimbleObjectiveC/DSL.m; sourceTree = "<group>"; };
 		1E8CB91811F777A877269B150E3C7B95 /* SatisfyAllOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SatisfyAllOf.swift; path = Sources/Nimble/Matchers/SatisfyAllOf.swift; sourceTree = "<group>"; };
@@ -155,18 +154,19 @@
 		2C6FC9D03D956273AB0AA01884F4B721 /* Pods-KeyStorage_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-KeyStorage_Example-umbrella.h"; sourceTree = "<group>"; };
 		2CD5FA5099692FC33E9CD69A8694CE6B /* SatisfyAnyOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SatisfyAnyOf.swift; path = Sources/Nimble/Matchers/SatisfyAnyOf.swift; sourceTree = "<group>"; };
 		2DAD98301448063E489B9FBE4876A68E /* KeyStorage-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "KeyStorage-Info.plist"; sourceTree = "<group>"; };
-		2F94886F33AF52BD3879534C1D26F452 /* KeychainHelpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeychainHelpers.swift; sourceTree = "<group>"; };
 		3031697F235122C072928335E840CD4C /* ToSucceed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ToSucceed.swift; path = Sources/Nimble/Matchers/ToSucceed.swift; sourceTree = "<group>"; };
 		3047699A132B6CBE65265F13A847F9C9 /* Pods-KeyStorage_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-KeyStorage_Tests.modulemap"; sourceTree = "<group>"; };
 		30DFCFF84CFD474A6B201FD9265783CB /* BeIdenticalTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeIdenticalTo.swift; path = Sources/Nimble/Matchers/BeIdenticalTo.swift; sourceTree = "<group>"; };
 		313CD5C0DB9684D4430EBFD79A39AE5B /* Pods-KeyStorage_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-KeyStorage_Example-dummy.m"; sourceTree = "<group>"; };
 		31BB249B2476B182CB1BD74008DBE0B1 /* KeyStorage-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "KeyStorage-umbrella.h"; sourceTree = "<group>"; };
 		32ACA7888A53A7D9384116490961885D /* EndWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EndWith.swift; path = Sources/Nimble/Matchers/EndWith.swift; sourceTree = "<group>"; };
-		3E1BA22C2326006B00F70408 /* KeyStoreUbiquitousProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStoreUbiquitousProvider.swift; sourceTree = "<group>"; };
+		3E1BA23023260CA200F70408 /* KeyStorageKeyChainProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyStorageKeyChainProvider.swift; path = KeyStorage/Classes/KeyStorageKeyChainProvider.swift; sourceTree = "<group>"; };
+		3E1BA23123260CA300F70408 /* KeyStoreDefaultsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyStoreDefaultsProvider.swift; path = KeyStorage/Classes/KeyStoreDefaultsProvider.swift; sourceTree = "<group>"; };
+		3E1BA23223260CA300F70408 /* KeyStoreUbiquitousProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeyStoreUbiquitousProvider.swift; path = KeyStorage/Classes/KeyStoreUbiquitousProvider.swift; sourceTree = "<group>"; };
+		3E1BA23323260CA300F70408 /* KeychainHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainHelpers.swift; path = KeyStorage/Classes/KeychainHelpers.swift; sourceTree = "<group>"; };
 		3E9CED15CB153D79433BA083147A5537 /* Nimble-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-umbrella.h"; sourceTree = "<group>"; };
 		4423766F2017567363AA9700FD7D3458 /* Expression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Expression.swift; path = Sources/Nimble/Expression.swift; sourceTree = "<group>"; };
 		492BCEC914D2527F53CC250E1D75D4FD /* Nimble-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nimble-prefix.pch"; sourceTree = "<group>"; };
-		4D73CDCE61163BB91DE2548B196FFC94 /* KeyStoreDefaultsProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = KeyStoreDefaultsProvider.swift; sourceTree = "<group>"; };
 		547E13B2156EB88650353C153FF55AD4 /* NMBStringify.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = NMBStringify.m; path = Sources/NimbleObjectiveC/NMBStringify.m; sourceTree = "<group>"; };
 		55EB3A1350FD850D5DB3237AFC14B644 /* BeginWith.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeginWith.swift; path = Sources/Nimble/Matchers/BeginWith.swift; sourceTree = "<group>"; };
 		57B6F181A3705D8B1BB39C02A70BA4DC /* ElementsEqual.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ElementsEqual.swift; path = Sources/Nimble/Matchers/ElementsEqual.swift; sourceTree = "<group>"; };
@@ -315,11 +315,11 @@
 		2222961B03382AF387376D23F5DBE6E3 /* KeyStorage */ = {
 			isa = PBXGroup;
 			children = (
-				2F94886F33AF52BD3879534C1D26F452 /* KeychainHelpers.swift */,
+				3E1BA23323260CA300F70408 /* KeychainHelpers.swift */,
+				3E1BA23023260CA200F70408 /* KeyStorageKeyChainProvider.swift */,
+				3E1BA23123260CA300F70408 /* KeyStoreDefaultsProvider.swift */,
+				3E1BA23223260CA300F70408 /* KeyStoreUbiquitousProvider.swift */,
 				E42468887E486703C398C5113136D3B9 /* KeyChainInfo.swift */,
-				4D73CDCE61163BB91DE2548B196FFC94 /* KeyStoreDefaultsProvider.swift */,
-				1BD8EDD0935BD8A85505D48FE98DEE30 /* KeyStorageKeyChainProvider.swift */,
-				3E1BA22C2326006B00F70408 /* KeyStoreUbiquitousProvider.swift */,
 				B00CC77F9265F1427635D0AC71E99C15 /* KeyStorage.swift */,
 				625573115FF7A82FCE1F9F5973A9ECF9 /* KeyStorageCrypter.swift */,
 				F577A5C4C5AC5389A5AC8A4C3376337C /* Pod */,
@@ -711,14 +711,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991D2F8075365420703B1498125786CC /* KeychainHelpers.swift in Sources */,
+				3E1BA23523260CA300F70408 /* KeyStoreDefaultsProvider.swift in Sources */,
+				3E1BA23423260CA300F70408 /* KeyStorageKeyChainProvider.swift in Sources */,
 				423FBB853739D2BA9022BA2EECA8159A /* KeyChainInfo.swift in Sources */,
+				3E1BA23623260CA300F70408 /* KeyStoreUbiquitousProvider.swift in Sources */,
 				42203C181E5B168D7952FE7B189A5C8F /* KeyStorage-dummy.m in Sources */,
 				4B4C28498ECF7E9800A861BAE1E918F3 /* KeyStorage.swift in Sources */,
-				3E1BA22D2326006B00F70408 /* KeyStoreUbiquitousProvider.swift in Sources */,
 				3915EE0EE0A228F82B7F8B2E298AF596 /* KeyStorageCrypter.swift in Sources */,
-				C3B33FCEAB7ABFC0A60857C9C7DEBDD8 /* KeyStorageKeyChainProvider.swift in Sources */,
-				086C7F4434A6156EDBDF4DD081D5F01B /* KeyStoreDefaultsProvider.swift in Sources */,
+				3E1BA23723260CA300F70408 /* KeychainHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,7 +987,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1050,7 +1050,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
