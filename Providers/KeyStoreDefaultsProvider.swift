@@ -3,7 +3,7 @@
 //  KeyStoreDefaultsProvider.swift
 //
 //  Created by Ben Bahrenburg on 3/23/16.
-//  Copyright © 2016 bencoding.com. All rights reserved.
+//  Copyright © 2019 bencoding.com. All rights reserved.
 //
 
 import Foundation
@@ -15,9 +15,9 @@ import Foundation
  
  */
 public final class KeyStoreDefaultsProvider: KeyStorage {
-    fileprivate var defaults: UserDefaults
-    fileprivate var crypter: KeyStorageCrypter?
-    fileprivate var usingEncryption: Bool = false
+    private var defaults: UserDefaults
+    private var crypter: KeyStorageCrypter?
+    private var usingEncryption: Bool = false
     
     /// the suiteName set when the provider was initialized
     var suiteName: String?
@@ -36,17 +36,22 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     }
 
     /**
+     Waits for any pending asynchronous updates to the defaults database and returns.  This method will always return true as the apple documents recommend not using synchronize
+     
+     - Returns: Bool is returned true if the data was saved successfully to disk, otherwise false.
+     */
+    public func synchronize() -> Bool {
+        return true
+    }
+    
+    /**
      Returns a Bool indicating if a stored value exists for the provided key.
      
      - Parameter forKey: The key to check if there is a stored value for.
      - Returns: Bool is returned true if a stored value exists or false if there is no stored value.
      */
     public func exists(forKey: String) -> Bool {
-        defaults.synchronize()
-        if let _ = defaults.object(forKey: forKey) {
-            return true
-        }
-        return false
+        return defaults.object(forKey: forKey) != nil
     }
 
     /**

@@ -1,19 +1,19 @@
 # KeyStorage
 
-KeyStorage is a simple secure key persistance library written in Swift.  Persist passwords, preferences, and other key information quickly, easily and securely using the Keychain or NSUserDefaults.
+KeyStorage is a simple secure key persistance library written in Swift.  Persist passwords, preferences, and other key information quickly, easily and securely using the Keychain, NSUserDefaults or NSUbiquitousKeyValueStore.
 
 ## Features
 
-* Strongly typed persistance to either KeyChain or NSUserDefaults
+* Strongly typed persistance to either Keychain, NSUserDefaults or NSUbiquitousKeyValueStore
 * Built-in AES 256 encryption [feature in process]
 * Extensible - add new storage or encrytion providers
 * Keychain helpers for finding AccessGroup information
 
 ## Requirements
 
-* Xcode 8.2 or newer
-* Swift 3.0
-* iOS 9 or greater
+* Xcode 10.3 or newer
+* Swift 5.0
+* iOS 11 or greater
 
 ## Installation
 
