@@ -25,6 +25,13 @@ public protocol KeyStorageCrypter {
      - Returns: The Data (optional) in encrypted form. This will be persisted by the Storage Provider.
      */
     func encrypt(data: Data, forKey: String) -> Data?
+    /**
+     Returns an encrypted Data type.
+     
+     - Parameter forKey: The key for the data element that should be encrypted.
+     - Parameter data: The Data Array that should be encrypted
+     - Returns: The Data Array (optional) in encrypted form. This will be persisted by the Storage Provider.
+     */
     func encrypt(data: [Data], forKey: String) -> [Data]?
     
     /**
@@ -35,5 +42,12 @@ public protocol KeyStorageCrypter {
      - Returns: The Data (optional) in decrypted form. This will be converted to one of the supported types and returned to the caller.
      */
     func decrypt(data: Data, forKey: String) -> Data?
+    /**
+     Returns an unencrypted Data type
+     
+     - Parameter forKey: The key for the data element that should be decrypted.
+     - Parameter data: The Data Array that should be decrypted
+     - Returns: The Data Array (optional) in decrypted form. This will be converted to one of the supported types and returned to the caller.
+     */
     func decrypt(data: [Data], forKey: String) -> [Data]?
 }

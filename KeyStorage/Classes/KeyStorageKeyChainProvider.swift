@@ -30,33 +30,33 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         self.synchronizable = synchronizable
     }
   
-    @discardableResult func setStruct<T: Codable>(forKey: String, value: T?) -> Bool {
+    @discardableResult public func setStruct<T: Codable>(forKey: String, value: T?) -> Bool {
         guard let data = try? JSONEncoder().encode(value) else {
             return removeKey(forKey: forKey)
         }
         return saveData(forKey: forKey, value: data)
     }
     
-    func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable {
+    public func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable {
         if let data = load(forKey: forKey) {
            return try! JSONDecoder().decode(type, from: data)
         }
         return nil
     }
     
-    @discardableResult func setStructArray<T: Codable>(forKey: String, value: [T]) -> Bool {
-        let raw = value.compactMap { try? JSONEncoder().encode($0) }
-        if raw.count == 0 {
+    @discardableResult public func setStructArray<T: Codable>(forKey: String, value: [T]) -> Bool {
+        let data = value.compactMap { try? JSONEncoder().encode($0) }
+        if data.count == 0 {
             return removeKey(forKey: forKey)
         }
-        return saveData(forKey: forKey, value: raw)
+        return saveData(forKey: forKey, value: data)
     }
     
-    func getStructArray<T>(_ type: T.Type, forKey: String) -> [T]? where T : Decodable {
+    public func getStructArray<T>(_ type: T.Type, forKey: String) -> [T] where T : Decodable {
         if let data = loadArray(forKey: forKey) {
            return data.map { try! JSONDecoder().decode(type, from: $0) }
         }
-        return nil
+        return []
     }
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {

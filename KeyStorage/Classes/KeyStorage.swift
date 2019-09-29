@@ -15,6 +15,12 @@ import Foundation
  */
 public protocol KeyStorage {
 
+    func setStruct<T: Codable>(forKey: String, value: T?) -> Bool
+    func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable
+    func setStructArray<T: Codable>(forKey: String, value: [T]) -> Bool
+    func getStructArray<T>(_ type: T.Type, forKey: String) -> [T] where T : Decodable
+    
+    
     /**
         Returns Data? (optional) for a provided key. Nil is returned if no stored value is found.
     
