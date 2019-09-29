@@ -44,6 +44,59 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         return true
     }
     
+    @discardableResult func setStruct<T: Codable>(forKey: String, value: T?) -> Bool {
+        guard let data = try? JSONEncoder().encode(value) else {
+            return removeKey(forKey: forKey)
+        }
+        if usingEncryption {
+            return saveData(forKey: forKey, value: data)
+        } else {
+            defaults.set(value, forKey: forKey)
+        }
+        return true
+    }
+    
+    func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable {
+        if usingEncryption {
+            if let data = load(forKey: forKey) {
+               return try! JSONDecoder().decode(type, from: data)
+            }
+            return nil
+        }
+        
+        guard let encodedData = defaults.data(forKey: forKey) else {
+            return nil
+        }
+        return try! JSONDecoder().decode(type, from: encodedData)
+    }
+    
+    @discardableResult func setStructArray<T: Codable>(forKey: String, value: [T]) -> Bool {
+        let raw = value.compactMap { try? JSONEncoder().encode($0) }
+        if raw.count == 0 {
+            return removeKey(forKey: forKey)
+        }
+        if usingEncryption {
+            return saveData(forKey: forKey, value: raw)
+        } else {
+            defaults.set(raw, forKey: forKey)
+        }
+        return true
+    }
+    
+    func getStructArray<T>(_ type: T.Type, forKey: String) -> [T]? where T : Decodable {
+        if usingEncryption {
+            if let data = loadArray(forKey: forKey) {
+                return data.map { try! JSONDecoder().decode(type, from: $0) }
+            }
+            return nil
+        } else {
+            guard let encodedData = defaults.array(forKey: forKey) as? [Data] else {
+                return []
+            }
+            return encodedData.map { try! JSONDecoder().decode(type, from: $0) }
+        }
+    }
+    
     /**
      Returns a Bool indicating if a stored value exists for the provided key.
      
@@ -358,7 +411,16 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
     }
- 
+
+    private func loadArray(forKey: String) -> [Data]? {
+        let raw = defaults.array(forKey: forKey)
+        guard let data = raw as? [Data] else { return nil }
+        if let crypto = self.crypter {
+            return crypto.decrypt(data: data, forKey: forKey)
+        }
+        return data
+    }
+    
     private func load(forKey: String) -> Data? {
         let data = defaults.data(forKey: forKey)
         guard data != nil else { return nil }
@@ -377,4 +439,12 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         return true
     }
     
+    private func saveData(forKey: String, value: [Data]) -> Bool {
+        if let crypto = self.crypter {
+            defaults.set(crypto.encrypt(data: value, forKey: forKey), forKey: forKey)
+        } else {
+            defaults.set(value, forKey: forKey)
+        }
+        return true
+    }
 }

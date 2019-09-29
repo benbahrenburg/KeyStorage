@@ -30,6 +30,35 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         self.synchronizable = synchronizable
     }
   
+    @discardableResult func setStruct<T: Codable>(forKey: String, value: T?) -> Bool {
+        guard let data = try? JSONEncoder().encode(value) else {
+            return removeKey(forKey: forKey)
+        }
+        return saveData(forKey: forKey, value: data)
+    }
+    
+    func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable {
+        if let data = load(forKey: forKey) {
+           return try! JSONDecoder().decode(type, from: data)
+        }
+        return nil
+    }
+    
+    @discardableResult func setStructArray<T: Codable>(forKey: String, value: [T]) -> Bool {
+        let raw = value.compactMap { try? JSONEncoder().encode($0) }
+        if raw.count == 0 {
+            return removeKey(forKey: forKey)
+        }
+        return saveData(forKey: forKey, value: raw)
+    }
+    
+    func getStructArray<T>(_ type: T.Type, forKey: String) -> [T]? where T : Decodable {
+        if let data = loadArray(forKey: forKey) {
+           return data.map { try! JSONDecoder().decode(type, from: $0) }
+        }
+        return nil
+    }
+    
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
         let data = NSKeyedArchiver.archivedData(withRootObject: value)
         return saveData(forKey: forKey, value: data)
@@ -326,6 +355,29 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         }
         return true
     }
+ 
+    private func saveData(forKey: String, value: [Data]) -> Bool {
+        
+        lock.lock()
+        defer { lock.unlock() }
+        
+        let query = buildQuery(forKey)
+        
+        if let crypto = self.crypter {
+            query[kSecValueData as String] = crypto.encrypt(data: value, forKey: forKey)
+        } else {
+            query[kSecValueData as String] = value
+        }
+    
+        if SecItemCopyMatching(query, nil) == noErr {
+            let status = SecItemUpdate(query, NSDictionary(dictionary: [kSecValueData: value]))
+            return handleResultStatus(forKey: forKey, status: status)
+        }
+        
+        let status = SecItemAdd(query, nil)
+        return handleResultStatus(forKey: forKey, status: status)
+
+    }
     
     private func saveData(forKey: String, value: Data) -> Bool {
         
@@ -371,6 +423,27 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         return nil
     }
 
+    private func loadArray(forKey: String) -> [Data]? {
+        let query = buildQuery(forKey)
+        // Setup parameters needed to return value from query
+        query[kSecMatchLimit as String] = kSecMatchLimitOne
+        query[kSecReturnData as String] = kCFBooleanTrue
+        
+        var dataTypeRef: AnyObject?
+        let status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
+        
+        if status == errSecSuccess {
+            if let data = dataTypeRef as! [Data]? {
+                if let crypto = self.crypter {
+                    return crypto.decrypt(data: data, forKey: forKey)
+                }
+                return data
+            }
+        }
+        
+        return nil
+    }
+    
     private func buildQuery(_ forKey: String) -> NSMutableDictionary {
         // Setup default access as generic password (rather than a certificate, internet password, etc)
         let query = NSMutableDictionary()
