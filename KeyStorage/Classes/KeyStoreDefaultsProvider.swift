@@ -58,9 +58,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         return saveData(forKey: forKey, value: data)
     }
  
-    public func getStruct<T>(_ type: T.Type, forKey: String) -> T? where T : Decodable {
+    public func getStruct<T>(forKey: String, forType: T.Type) -> T? where T : Decodable {
         if let data = load(forKey: forKey) {
-           return try! JSONDecoder().decode(type, from: data)
+           return try! JSONDecoder().decode(forType, from: data)
         }
         return nil
     }
@@ -81,9 +81,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     }
  
     
-    public func getStructArray<T>(_ type: T.Type, forKey: String) -> [T] where T : Decodable {
+    public func getStructArray<T>(forKey: String, forType: T.Type) -> [T] where T : Decodable {
         if let data = loadArray(forKey: forKey) {
-            return data.map { try! JSONDecoder().decode(type, from: $0) }
+            return data.map { try! JSONDecoder().decode(forType, from: $0) }
         }
         return []
     }
