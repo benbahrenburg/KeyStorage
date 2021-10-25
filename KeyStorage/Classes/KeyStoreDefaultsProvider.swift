@@ -166,7 +166,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
         if usingEncryption {
-            let data = NSKeyedArchiver.archivedData(withRootObject: value)
+            guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+                return false
+            }
             return saveData(forKey: forKey, value: data)
         } else {
             defaults.set(value, forKey: forKey)
@@ -256,7 +258,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
     }
  
     @discardableResult public func setObject(forKey: String, value: NSCoding) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+            return false
+        }
         return saveData(forKey: forKey, value: data)
     }
     
@@ -266,7 +270,10 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
             return nil
         }
         
-        return NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? NSArray
+        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data) as? NSArray {
+            return obj
+        }
+        return nil
     }
  
     /**
@@ -277,7 +284,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
      - Returns: True if saved successfully, false if the provider was not able to save successfully
      */
     @discardableResult public func setArray(forKey: String, value: NSArray) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+            return false
+        }
         return saveData(forKey: forKey, value: data)
     }
     
@@ -286,8 +295,10 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         guard let data = getObject(forKey: forKey) else {
             return nil
         }
-        
-        return NSKeyedUnarchiver.unarchiveObject(with: data as! Data) as? NSDictionary
+        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data as! Data) as? NSDictionary {
+            return obj
+        }
+        return nil
     }
 
     /**
@@ -298,7 +309,9 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
      - Returns: True if saved successfully, false if the provider was not able to save successfully
      */
     @discardableResult public func setDictionary(forKey: String, value: NSDictionary) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+            return false
+        }
         return saveData(forKey: forKey, value: data)
     }
     
@@ -393,12 +406,16 @@ public final class KeyStoreDefaultsProvider: KeyStorage {
         guard let data = load(forKey: forKey) else {
             return nil
         }
-        
-        return NSKeyedUnarchiver.unarchiveObject(with: data) as? NSCoding
+        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSCoding {
+            return obj
+        }
+        return nil
     }
     
     private func saveObject(forKey: String, value: NSCoding) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
+            return false
+        }
         return saveData(forKey: forKey, value: data)
     }
 

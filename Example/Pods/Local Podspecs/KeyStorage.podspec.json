@@ -1,6 +1,6 @@
 {
   "name": "KeyStorage",
-  "version": "0.2.4",
+  "version": "0.3.2",
   "summary": "KeyStorage is a simple secure key persistance library written in Swift.",
   "description": "Persist passwords, preferences, and other key information quickly, easily and securely using the Keychain or NSUserDefaults.",
   "homepage": "https://github.com/benbahrenburg/KeyStorage",
@@ -10,12 +10,17 @@
   },
   "source": {
     "git": "https://github.com/benbahrenburg/KeyStorage.git",
-    "tag": "0.2.4"
+    "tag": "0.3.2"
   },
   "social_media_url": "https://twitter.com/bencoding",
+  "swift_versions": "5.0",
   "platforms": {
-    "ios": "10.0",
-    "watchos": "2.0"
+    "ios": "14.0",
+    "watchos": "7.0"
   },
-  "source_files": "KeyStorage/Classes/**/*"
+  "source_files": "KeyStorage/Classes/**/*",
+  "pod_target_xcconfig": {
+    "SWIFT_VERSION": "5.0"
+  },
+  "swift_version": "5.0"
 }

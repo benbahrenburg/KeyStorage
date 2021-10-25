@@ -1,13 +1,13 @@
 PODS:
-  - KeyStorage (0.2.4)
-  - Nimble (8.0.1)
+  - KeyStorage (0.3.2)
+  - Nimble (9.2.1)
 
 DEPENDENCIES:
   - KeyStorage (from `../`)
   - Nimble
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - Nimble
 
 EXTERNAL SOURCES:
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  KeyStorage: f3b7a8c79ae1913a72072371929a9b9aec032496
-  Nimble: 45f786ae66faa9a709624227fae502db55a8bdd0
+  KeyStorage: 8e34690c82da2ebf836a02fb302c5062b9482eeb
+  Nimble: e7e615c0335ee4bf5b0d786685451e62746117d5
 
 PODFILE CHECKSUM: 1a6b9e3a51a4b996ccc577b192097509cd325040
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.11.2

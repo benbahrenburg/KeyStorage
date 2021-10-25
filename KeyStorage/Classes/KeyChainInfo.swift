@@ -60,10 +60,8 @@ public struct KeyChainInfo {
     public enum accessibleOption: RawRepresentable {
         case whenUnlocked,
         afterFirstUnlock,
-        always,
         whenUnlockedThisDeviceOnly,
         afterFirstUnlockThisDeviceOnly,
-        alwaysThisDeviceOnly,
         whenPasscodeSetThisDeviceOnly
         
         public init?(rawValue: String) {
@@ -88,16 +86,6 @@ public struct KeyChainInfo {
                 */
             case String(kSecAttrAccessibleAfterFirstUnlock):
                 self = .afterFirstUnlock
-
-                /**
-                Item data can always be accessed
-                regardless of the lock state of the device.  This is not recommended
-                for anything except system use. Items with this attribute will migrate
-                to a new device when using encrypted backups.
-                 */
-            case String(kSecAttrAccessibleAlways):
-                self = .always
-                
                 /**
                  Item data can only
                  be accessed while the device is unlocked. This is recommended for items
@@ -118,17 +106,7 @@ public struct KeyChainInfo {
                  */
             case String(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly):
                 self = .afterFirstUnlockThisDeviceOnly
-                
-                /**
-                 Item data can always
-                 be accessed regardless of the lock state of the device.  This option
-                 is not recommended for anything except system use. Items with this
-                 attribute will never migrate to a new device, so after a backup is
-                 restored to a new device, these items will be missing.
-                 */
-            case String(kSecAttrAccessibleAlwaysThisDeviceOnly):
-                self = .alwaysThisDeviceOnly
-                
+                                
                 /**
                  Item data can
                  only be accessed while the device is unlocked. This class is only
@@ -155,16 +133,12 @@ public struct KeyChainInfo {
                 return String(kSecAttrAccessibleWhenUnlocked)
             case .afterFirstUnlock:
                 return String(kSecAttrAccessibleAfterFirstUnlock)
-            case .always:
-                return String(kSecAttrAccessibleAlways)
             case .whenPasscodeSetThisDeviceOnly:
                 return String(kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly)
             case .whenUnlockedThisDeviceOnly:
                 return String(kSecAttrAccessibleWhenUnlockedThisDeviceOnly)
             case .afterFirstUnlockThisDeviceOnly:
                 return String(kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly)
-            case .alwaysThisDeviceOnly:
-                return String(kSecAttrAccessibleAlwaysThisDeviceOnly)
             }
         }
     }
