@@ -60,19 +60,19 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
     }
     
     @discardableResult public func setURL(forKey: String, value: URL) -> Bool {
-        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            return false
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
+            return saveData(forKey: forKey, value: data)
         }
-        return saveData(forKey: forKey, value: data)
+        return false
     }
     
     public func getURL(forKey: String) -> URL? {
         guard let data = load(forKey: forKey) else {
             return nil
         }
-        
-        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? URL {
-            return obj
+    
+        if let result = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? URL {
+            return result
         }
         return nil
     }
@@ -82,17 +82,18 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
             return defaultValue
         }
         
-        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? URL {
-            return obj
+        if let result = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? URL {
+            return result
         }
         return defaultValue
     }
     
     @discardableResult public func setObject(forKey: String, value: NSCoding) -> Bool {
-        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            return false
+        // let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
+            return saveData(forKey: forKey, value: data)
         }
-        return saveData(forKey: forKey, value: data)
+        return false
     }
     
     @discardableResult public func setData(forKey: String, value: Data) -> Bool {
@@ -296,8 +297,9 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         guard status != errSecItemNotFound else { return true }
         
         if status != errSecSuccess {
-            let error = KeyChainInfo.errorDetail.unhandledError(status: status).localizedDescription
-            print("Error removing all keys from keychain. Error: \(error) ")
+            if let error: String = SecCopyErrorMessageString(status, nil) as String? {
+                print("Error removeAllKeys in keychain. Error: \(error) ")
+            }
             return false
         }
         
@@ -309,8 +311,8 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
             return nil
         }
         
-        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSArray {
-            return obj
+        if let result = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSArray {
+            result
         }
         return nil
     }
@@ -323,18 +325,19 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
      - Returns: True if saved successfully, false if the provider was not able to save successfully
      */
     @discardableResult public func setArray(forKey: String, value: NSArray) -> Bool {
-        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            return false
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
+            return saveData(forKey: forKey, value: data)
         }
-        return saveData(forKey: forKey, value: data)
+        return false
     }
     
     public func getDictionary(forKey: String) -> NSDictionary? {
         guard let data = load(forKey: forKey) else {
             return nil
         }
-        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSDictionary {
-            return obj
+        
+        if let result = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSDictionary {
+            result
         }
         return nil
     }
@@ -347,38 +350,40 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
      - Returns: True if saved successfully, false if the provider was not able to save successfully
      */
     @discardableResult public func setDictionary(forKey: String, value: NSDictionary) -> Bool {
-        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            return false
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
+            return saveData(forKey: forKey, value: data)
         }
-        return saveData(forKey: forKey, value: data)
+        return false
     }
     
     private func getObject(forKey: String) -> NSCoding? {
         guard let data = load(forKey: forKey) else {
             return nil
         }
-        if let obj = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSCoding {
-            return obj
+        
+        if let result = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? NSCoding {
+            result
         }
         return nil
     }
     
     private func saveObject(forKey: String, value: NSCoding) -> Bool {
-        guard let data: Data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) else {
-            return false
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false) {
+            return saveData(forKey: forKey, value: data)
         }
-        return saveData(forKey: forKey, value: data)
+        return false
     }
     
     private func handleResultStatus(forKey: String, status: OSStatus) -> Bool {
         if status != errSecSuccess {
-            let error = KeyChainInfo.errorDetail.unhandledError(status: status).localizedDescription
-            print("Error Saving key \(forKey) to keychain. Error: \(error) ")
+            if let error: String = SecCopyErrorMessageString(status, nil) as String? {
+                print("Error Saving key \(forKey) to keychain. Error: \(error) ")
+            }
             return false
         }
         return true
     }
- 
+         
     private func saveData(forKey: String, value: [Data]) -> Bool {
         
         lock.lock()
@@ -421,8 +426,8 @@ public final class KeyStorageKeyChainProvider: KeyStorage {
         }
         
         let status = SecItemAdd(query, nil)
-        return handleResultStatus(forKey: forKey, status: status)
-
+        let saveResult: Bool = handleResultStatus(forKey: forKey, status: status)
+        return saveResult
     }
     
     private func load(forKey: String) -> Data? {

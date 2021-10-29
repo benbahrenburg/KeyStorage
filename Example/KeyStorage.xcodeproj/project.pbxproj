@@ -28,7 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0BEE44F763E8EBDCD49AA19A /* KeyStorage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KeyStorage.podspec; path = ../KeyStorage.podspec; sourceTree = "<group>"; };
+		0BEE44F763E8EBDCD49AA19A /* KeyStorage.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KeyStorage.podspec; path = ../KeyStorage.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		10087B25E043122911482C7E /* Pods_KeyStorage_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KeyStorage_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37F39979A4BBEA9E3DA8E1E2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		3E8F30551E17593000204F2A /* KeyStorage_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KeyStorage_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
