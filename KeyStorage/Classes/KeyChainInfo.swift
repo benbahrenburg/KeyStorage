@@ -86,6 +86,7 @@ public struct KeyChainInfo {
                 */
             case String(kSecAttrAccessibleAfterFirstUnlock):
                 self = .afterFirstUnlock
+
                 /**
                  Item data can only
                  be accessed while the device is unlocked. This is recommended for items
