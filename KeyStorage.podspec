@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'KeyStorage'
-  s.version          = '1.0.2'
+  s.version          = '1.0.4'
   s.summary          = 'KeyStorage is a simple secure key persistance library written in Swift.'
 
   s.description  = <<-DESC
