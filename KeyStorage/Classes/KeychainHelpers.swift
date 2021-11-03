@@ -25,7 +25,7 @@ open class KeychainHelpers {
         let query: [String:Any] = [
             kSecClass as String : kSecClassGenericPassword,
             kSecAttrAccount as String : "detectAppIdentifierForKeyChainGroupIdUsage",
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+            kSecAttrAccessible as String: kSecAttrAccessibleAlwaysThisDeviceOnly,
             kSecReturnAttributes as String : kCFBooleanTrue!
         ]
         
